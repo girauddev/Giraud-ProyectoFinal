@@ -1,0 +1,8 @@
+{% extends "core/blog.html" %}
+{% block contenido %}
+    <form method="post">>
+        {% csrf_token %}
+        Confirma el borrado?
+        <input type="submit" value="Si">
+    </form>
+{% endblock contenido %}

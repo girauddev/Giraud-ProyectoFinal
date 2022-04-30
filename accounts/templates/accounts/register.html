@@ -1,0 +1,22 @@
+{% extends 'core/index.html' %}
+{% block contenido %}
+<section class="py-5">
+    <div class="container my-5">
+        <div class="col-lg-6">
+            
+            <h1> Register</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
+                <p></p>
+                <button class="btn btn-primary btn-block mb-4">Registrarse</button>
+                <div class="text-center">
+                    <p>Tenés una cuenta? <a href="{% url 'login'%}">Iniciar sesión</a></p>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock contenido %} 
