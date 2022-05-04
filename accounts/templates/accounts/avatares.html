@@ -1,0 +1,17 @@
+{% extends 'core/index.html' %}
+{% block contenido %}
+<section class="py-5">
+    <div class="container my-5">
+        <div class="col-lg-6">
+            <h1>
+                Avatar
+            </h1>
+            {% if img %}
+            <img height="100px" src="{{img}}">
+            {% else %}
+            <p>{{msj}}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock contenido %} 

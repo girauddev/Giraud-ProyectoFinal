@@ -1,42 +1,37 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.views.generic import ListView
 from django.views.generic import DetailView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from .forms import *
 from .models import *
 
 # Create your views here.
-@login_required
-def PageFormulario(request):
-    if request.method == 'POST':
-        form = PageForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            msj = form.cleaned_data['title']   
-            page = Page(title=data ['title'], content=data['content'], texto=data['texto'], usuario=data['usuario'])
-            page.save()
-            return render(request, "core/index.html", {'msj':f'Se creo la página "{msj}"'})
-        else:
-            return render(request, "pages/form_page.html", {'form':form})
-    else:     
-        form = PageForm()
-        return render(request, "pages/form_page.html", {'form':form})
+class ListPage(ListView):
+    model = Page
+    template_name = 'pages/list_page.html'
+    ordering = ['-created']
 
-def ListPage(request):
-    searchPage = request.GET.get('title', None)
-
-    if searchPage is not None:
-        pages = Page.objects.filter(title__icontains=searchPage)
-    else:
-        pages = Page.objects.all()
-    form = SearchPage()
-    return render(request, "pages/list_page.html", {'form':form,'pages':pages})
-
-class DeletePage(DeleteView):
-   model = Page
-   success_url = '/list_page/'
-
-class DetailPage(DetailView):
+class ViewPage(DetailView):
     model = Page
     template_name = 'pages/detail_page.html'
+class CreatePage(CreateView):
+    model = Page
+    form_class = PageForm
+    success_url = "/pages/"
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({'msj': 'Crear post'})
+        return ctx
+class UpdatePage(UpdateView):
+    model = Page
+    form_class = PageForm
+    success_url = "/pages/"
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({'msj': 'Actualizar post'})
+        return ctx
+class DeletePage(DeleteView):
+    model = Page
+    success_url = "/pages/"

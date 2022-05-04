@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Page
 
-
-class PageForm(forms.Form):
-    title = forms.CharField(max_length=20)
-    content = forms.CharField(max_length=50)
-    texto = forms.CharField(widget=forms.Textarea)
-    usuario = forms.CharField(max_length=50)
-
-class SearchPage(forms.Form):
-    titulo = forms.CharField(max_length=20)
-
+class PageForm(forms.ModelForm):
+    class Meta:
+        model =     Page
+        fields =    ['title', 'subtitle', 'content', 'image', 'autor']
+        widgets =   {
+                    'title': forms.TextInput(attrs={'class':'form-control','placeholder':'Titulo'}),
+                    'subtitle': forms.TextInput(attrs={'class':'form-control','placeholder':'Subtitulo'}),
+                    'autor' : forms.TextInput(attrs={'class':'form-control','value':'','id':'autor', 'type':'hidden'})
+                    }

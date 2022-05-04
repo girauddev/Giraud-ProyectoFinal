@@ -4,13 +4,15 @@
   <div class="row">
       <div class="col-lg-8">
           <div class="card mb-6">
-              <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+              <a href="#!"><img class="card-img-top" src="{{page.image.url}}" width="900" height="400" alt="..." /></a>
               <div class="card-body">
-                  <div class="small text-muted"></div>
+                  <div class="small text-muted">Creado el {{page.created}} por {{page.autor}}</div>
                   <h2 class="card-title">{{page.title}}</h2>
-                  <p class="card-text">{{page.content}}</p>
+                  <h3 class="card-title">{{page.subtitle}}</h3>
+                  <p class="card-text">{{page.content|safe}}</p>
                   <p class="card-text">{{page.texto}}</p>
                   <p class="card-text">{{page.usuario}}</p>
+                  <div class="small text-muted">Actualizado el {{page.updated}}</div>
               </div>
           </div>
       </div>

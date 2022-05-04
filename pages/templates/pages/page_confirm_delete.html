@@ -1,8 +1,8 @@
 {% extends "core/blog.html" %}
 {% block contenido %}
-    <form method="post">>
+    <form method="post">
         {% csrf_token %}
-        Confirma el borrado?
-        <input type="submit" value="Si">
+        ¿Esta seguro que quiere borrar este blog?
+        <button class="btn btn-primary btn-block mb-4">Aplicar</button>
     </form>
 {% endblock contenido %}
